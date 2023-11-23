@@ -1,4 +1,4 @@
-TetraMind: Desafía tu Lógica y Amplía tu Vocabulario 🧠🎮
+*TetraMind: Desafía tu Lógica y Amplía tu Vocabulario 🧠🎮*
 ¡Bienvenido a TetraMind! No es solo Tetris; es una experiencia educativa y entretenida diseñada para motivarte a través de niveles estratégicos. TetraMind impulsa el desarrollo de habilidades clave y fomenta el pensamiento eficiente. En coherencia con nuestra visión de responsabilidad social, hemos integrado un componente de vocabulario en inglés para enriquecer tu destreza lingüística.
 
 Características Destacadas:
