@@ -40,6 +40,7 @@ public:
     bool eventFilter(QObject *obj, QEvent *event);
     void cargarPalabras(vector<string>& datos);
     void generarPalabra(vector<string>& datos);
+    void limpiarHoldScene();
 
     /**
    * @brief renderTetromino Render tetromino to the correct scene

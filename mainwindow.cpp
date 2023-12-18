@@ -236,23 +236,20 @@ void MainWindow::checkRows() {
         int y = block->gridPos().y;
         rowSums.at(y) += 1;
     }
-
     int amountOfRows = 0;
     for (unsigned int i = 0; i < rowSums.size(); i++) {
         int sum = rowSums.at(i);
         if (sum == COLUMNS) {
+            limpiarHoldScene();
             generarPalabra(datos);
             deleteRow(i);
             amountOfRows += 1;
         }
     }
-
     int baseScore = amountOfRows * SCORE;
     int extraScore = amountOfRows * SCORE / 2;
-
     score_ = score_ + baseScore + extraScore;
     emit setScore(score_);
-
     if (amountOfRows == 4) {
         tetrisCount_ += 1;
         ui->tetrisCount->setText("Tetris count: " + QString::number(tetrisCount_));
@@ -298,4 +295,8 @@ void MainWindow::deleteRow(const int &y) {
             block->move(Coords(DOWN));
         }
     }
+}
+
+void MainWindow::limpiarHoldScene() {
+    holdScene_->clear();
 }
