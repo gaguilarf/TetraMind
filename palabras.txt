@@ -1,0 +1,16 @@
+Time
+Person
+Year
+Way
+Day
+Thing
+Man
+World
+Life
+Hand
+Part
+Child
+Eye
+Woman
+Place
+Work
