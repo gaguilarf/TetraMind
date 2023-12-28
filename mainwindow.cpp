@@ -216,8 +216,12 @@ void MainWindow::generarPalabra(vector<string>& datos) {
     int n = datos.size();
     int indice = rand() % n;
     QGraphicsTextItem * io = new QGraphicsTextItem;
-    io->setPos(50,50);
     io->setPlainText(QString::fromStdString(datos[indice]));
+    io->setDefaultTextColor(QColor("white"));
+    io->setFont(QFont(io->font().family(),18,false));
+    QRectF bR = io->sceneBoundingRect();
+    io->setPos(90 - bR.width()/2, 60 - bR.height()/2);
+    //io->setPos(X - bR.width()/2,Y - bR.height()/2) 180x120;
     holdScene_->addItem(io);
 }
 
