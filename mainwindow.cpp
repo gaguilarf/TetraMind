@@ -180,6 +180,8 @@ void MainWindow::tick() {
     }
 }
 
+
+
 void MainWindow::on_startButton_clicked() {
     timer.start();
     ui->graphicsView->setFocus();
