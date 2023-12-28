@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <QDebug>
+#include <QDir>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -192,7 +193,8 @@ void MainWindow::rotate(const int &direction) {
 void MainWindow::cargarPalabras(vector<string>& datos) {
     string texto;
     ifstream archivoLectura;
-    archivoLectura.open("palabras.txt");
+    cout << QDir::currentPath().toStdString() << endl;
+    archivoLectura.open(QDir::currentPath().toStdString() + "/palabras.txt");
     if (archivoLectura.is_open()){
         cout << "leido" << endl;
         while (getline (archivoLectura, texto)) {
@@ -200,6 +202,13 @@ void MainWindow::cargarPalabras(vector<string>& datos) {
         }
     } else {
         cout << "no leido" << endl;
+        int result = QMessageBox::warning(this, "Error",
+                                          QString("Archivo de palabras no cargado"),
+                                          QMessageBox::Ok);
+
+        if (result == QMessageBox::Ok) {
+            exit(0);
+        }
     }
 }
 
