@@ -5,7 +5,7 @@
 
 Tetromino::Tetromino(const TetrominoType& type, MainWindow* w, Coords pos)
     : pos_(pos), w_(w), type_(type) {
-    /// Set the shape and background image according the type
+    // Definir la forma e imagen de fondo de acuerdo al tipo
     switch (type) {
     case HORIZONTAL:
         SIZE_X = 4;
@@ -62,13 +62,13 @@ bool Tetromino::moveTo(const Coords& c) {
 
     bool validMove = true;
     for (Block block : blocks_) {
-        /// Check that none of the blocks cross boundaries
+        // Comprobar si alguno de los bloques sobrepasa los limites
         if (!block->isPossibleMove()) {
             validMove = false;
             break;
         }
 
-        /// Check that there is not a non active block in current block position
+        // Comprobar si no bloques activos en la posicion actual del bloque
         for (Block gridBlock : w_->blocks()) {
             if (!gridBlock->getActive() && gridBlock->isCollidingWith(block)) {
                 validMove = false;
@@ -78,7 +78,6 @@ bool Tetromino::moveTo(const Coords& c) {
     }
 
     if (!validMove) {
-        /// if not a valid move, move the block back
         move(Coords(0, 0) - c);
     }
 
@@ -103,7 +102,6 @@ void Tetromino::rotateIfAble(const int& direction) {
         data = OBlockDataset;
     }
 
-    /// Run the super rotation offset tests
     for (int i = 0; i < (int)data.at(SPAWN).size(); i++) {
         Coords offset = data.at(rotation_).at(i) - data.at(nextState).at(i);
         if (moveTo(offset)) {
@@ -136,7 +134,7 @@ std::vector<Block> Tetromino::blocks() const { return blocks_; }
 void Tetromino::render() {
     clear();
 
-    /// Initialize the blocks_ in correct position according to the shape
+    // Inicializar los bloques de acuerdo a la forma definida
     for (int y = 0; y < SIZE_Y; y++) {
         for (int x = 0; x < SIZE_X; x++) {
             if (shape_.at(y).at(x)) {

@@ -185,7 +185,7 @@ void MainWindow::on_startButton_clicked() {
     ui->graphicsView->setFocus();
     ui->startButton->setDisabled(true);
     ui->stopButton->setEnabled(true);
-    ui->stopButton->setText("STOP");
+    ui->stopButton->setText("DETENER");
 }
 
 std::vector<Block> MainWindow::blocks() const { return blocks_; }
@@ -194,7 +194,7 @@ void MainWindow::on_stopButton_clicked() {
     timer.stop();
     ui->startButton->setEnabled(true);
     ui->stopButton->setDisabled(true);
-    ui->startButton->setText("CONTINUE");
+    ui->startButton->setText("CONTINUAR");
 }
 
 void MainWindow::move(const Directions &direction) {

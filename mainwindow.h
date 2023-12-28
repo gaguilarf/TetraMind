@@ -41,67 +41,24 @@ public:
     void renderTetromino(Tetromino *tetro, QGraphicsScene *scene,
                          SceneType type = DEFAULT);
 
-    /**
-   * @brief blocks getter for the blocks_
-   * @return
-   */
     vector<Block> blocks() const;
 
 private slots:
-    /**
-   * @brief tick The game tick which is called on the every timer timeout
-   */
     void tick();
-
-    /**
-   * @brief Button click handlers
-   */
     void on_startButton_clicked();
     void on_stopButton_clicked();
-
-    /**
-   * @brief move Move the currently active tetromino to a spesified direction if
-   * it exists
-   * @param direction Direction to move the tetromino to
-   */
     void move(const Directions &direction);
-
-    /**
-   * @brief rotate Rotate the currently atcive tetromino
-   * @param direction Direction to rotate the tetromino to
-   */
     void rotate(const int &direction);
 
 signals:
-    /**
-   * @brief setScore Set score signal
-   * @param score
-   */
     void setScore(int score);
 
 private:
 
     QSoundEffect* m_backgroundMusic;
-
-    /**
-   * @brief checkRows Check if there is rows that need removing
-   */
     void checkRows();
-
-    /**
-   * @brief deleteRow Delete the row at the spesified Y coordinates
-   * @param y The row to delete
-   */
     void deleteRow(const int &y);
-
-    /**
-   * @brief fallDown Instantly move the tetromino as down as possible
-   */
     void fallDown();
-
-    /**
-   * @brief gameOver Execute game over
-   */
     void gameOver();
 
     Ui::MainWindow *ui;
