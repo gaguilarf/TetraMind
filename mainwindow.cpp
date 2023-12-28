@@ -8,6 +8,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    this->setStyleSheet("QMainWindow { border-radius: 5px; }");
 
     /// Initialize Scenes
     scene_ = new QGraphicsScene(this);
@@ -27,6 +28,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     scene_->setSceneRect(0, 0, BORDER_RIGHT, BORDER_DOWN);
     nextScene_->setSceneRect(0, 0, SMALL_BORDER_RIGHT, SMALL_BORDER_DOWN);
     holdScene_->setSceneRect(0, 0, SMALL_BORDER_RIGHT, SMALL_BORDER_DOWN);
+
+    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    ui->nextView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->nextView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    ui->holdView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->holdView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     int seed = time(0);
     randomEng.seed(seed);
@@ -103,11 +113,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
 
     case Qt::Key_X:
         fallDown();
-        break;
-
-    case Qt::Key_Up:
-    case Qt::Key_W:
-        //takeHold();
         break;
 
     default:
@@ -189,7 +194,7 @@ void MainWindow::on_stopButton_clicked() {
     timer.stop();
     ui->startButton->setEnabled(true);
     ui->stopButton->setDisabled(true);
-    ui->stopButton->setText("CONTINUE");
+    ui->startButton->setText("CONTINUE");
 }
 
 void MainWindow::move(const Directions &direction) {
@@ -237,24 +242,6 @@ void MainWindow::generarPalabra(vector<string>& datos) {
     io->setPos(90 - bR.width()/2, 60 - bR.height()/2);
     holdScene_->addItem(io);
 }
-
-/*void MainWindow::takeHold() {
-    if (!justReleased_ && tetrominion_ != nullptr) {
-        Tetromino *temp = holdTetrominion_;
-        holdTetrominion_ = tetrominion_;
-        holdTetrominion_->setPos(Coords(SMALL_BORDER_RIGHT / BLOCK / 2 - 2,
-                                        SMALL_BORDER_DOWN / BLOCK / 2 - 1));
-        renderTetromino(holdTetrominion_, holdScene_, HOLD);
-
-        tetrominion_ = temp;
-        if (tetrominion_ != nullptr) {
-            tetrominion_->setPos(Coords(TETRO_CENTER, 0));
-            renderTetromino(tetrominion_, scene_, MAIN);
-        }
-
-        justReleased_ = true;
-    }
-}*/
 
 void MainWindow::checkRows() {
     std::vector<int> rowSums(ROWS, 0);

@@ -1,6 +1,12 @@
-.QGraphicsView {
+.QGraphicsView#graphicsView {
+  background: url(images/53.png) center center no-repeat;
+  border: 2px solid gray;
+  border-radius: 4px;
+}
+
+.QGraphicsView#nextView, .QGraphicsView#holdView {
   background-color: rgb(76, 77, 82);
-  border: 0px solid red;
+  border: 2px solid gray;
   border-radius: 4px;
 }
 
@@ -23,4 +29,8 @@
 
 QLabel {
   color: white;
+}
+
+QMainWindow {
+    border-radius: 5px;
 }

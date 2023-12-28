@@ -82,10 +82,6 @@ signals:
 private:
 
     QSoundEffect* m_backgroundMusic;
-    /**
-   * @brief takeHold Switch the current tetromino and the one in hold
-   */
-    void takeHold();
 
     /**
    * @brief checkRows Check if there is rows that need removing

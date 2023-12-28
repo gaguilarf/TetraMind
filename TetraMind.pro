@@ -3,7 +3,7 @@ QT += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = EPIS
+TARGET = TetraMind
 TEMPLATE = app
 
 CONFIG += c++17
