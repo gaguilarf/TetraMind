@@ -3,16 +3,22 @@
 #include <fstream>
 #include <iostream>
 #include <QDebug>
+#include <QSoundEffect>
 #include <QDir>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    //ui->startButton->setText("hola");
 
     /// Initialize Scenes
     scene_ = new QGraphicsScene(this);
     nextScene_ = new QGraphicsScene(this);
     holdScene_ = new QGraphicsScene(this);
+
+    m_backgroundMusic = new QSoundEffect(this);
+    m_backgroundMusic->setSource(QUrl("qrc:/music/background.wav"));
+    m_backgroundMusic->setLoopCount(QSoundEffect::Infinite);
+    m_backgroundMusic->setVolume(0.1f);
+
 
     ui->graphicsView->setScene(scene_);
     ui->nextView->setScene(nextScene_);
@@ -42,23 +48,31 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->graphicsView->installEventFilter(this);
     ui->graphicsView->show();
     cargarPalabras(datos);
+    m_backgroundMusic->play();
 }
 
 MainWindow::~MainWindow() {
     for (Block block : blocks_) {
-        delete block;
+        if (block != nullptr) {
+            delete block;
+            block = nullptr;
+        }
     }
 
+    blocks_.clear();
+
     delete nextTetrominion_;
+    nextTetrominion_ = nullptr;
 
     if (tetrominion_ != nullptr) {
         delete tetrominion_;
+        tetrominion_ = nullptr;
     }
 
     if (holdTetrominion_ != nullptr) {
         delete holdTetrominion_;
+        holdTetrominion_ = nullptr;
     }
-
     delete ui;
 }
 
@@ -117,7 +131,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event){
         result = QObject::eventFilter(obj, event);
 
     return result;
-}//eventFilter
+}
 
 void MainWindow::renderTetromino(Tetromino *tetro, QGraphicsScene *scene,
                                  SceneType type) {
@@ -221,7 +235,6 @@ void MainWindow::generarPalabra(vector<string>& datos) {
     io->setFont(QFont(io->font().family(),18,false));
     QRectF bR = io->sceneBoundingRect();
     io->setPos(90 - bR.width()/2, 60 - bR.height()/2);
-    //io->setPos(X - bR.width()/2,Y - bR.height()/2) 180x120;
     holdScene_->addItem(io);
 }
 

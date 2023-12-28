@@ -8,5 +8,6 @@
         <file alias="orange">images/orange.png</file>
         <file alias="yellow">images/yellow.png</file>
         <file>styles.qss</file>
+        <file>music/background.wav</file>
     </qresource>
 </RCC>

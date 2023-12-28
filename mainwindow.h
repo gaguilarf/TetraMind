@@ -18,6 +18,7 @@
 
 using namespace std;
 
+class QSoundEffect;
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -32,22 +33,11 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    /**
-   * @brief keyPressEvent Key event handler that takes care of the user input
-   * @param event
-   */
     void keyPressEvent(QKeyEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event);
     void cargarPalabras(vector<string>& datos);
     void generarPalabra(vector<string>& datos);
     void limpiarHoldScene();
-
-    /**
-   * @brief renderTetromino Render tetromino to the correct scene
-   * @param tetro Tetromino to render
-   * @param scene Scene where to render the tetromino
-   * @param type Which type of scene it was
-   */
     void renderTetromino(Tetromino *tetro, QGraphicsScene *scene,
                          SceneType type = DEFAULT);
 
@@ -90,6 +80,8 @@ signals:
     void setScore(int score);
 
 private:
+
+    QSoundEffect* m_backgroundMusic;
     /**
    * @brief takeHold Switch the current tetromino and the one in hold
    */
